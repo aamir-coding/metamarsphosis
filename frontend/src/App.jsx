@@ -2750,7 +2750,7 @@ const getMyPid=()=>{
 
 export default function App(){
   // ══ CONFIGURE: paste your Render URL below (no trailing slash) ══
-  const SERVER_URL = "https://YOUR-APP-NAME.onrender.com";
+  const SERVER_URL = "https://metamarsphosis.onrender.com";
 
   const [pid]=useState(getMyPid);
   const [gs,setGs]=useState(null);
