@@ -1,0 +1,17 @@
+{
+  "name": "terraforming-mars-server",
+  "version": "1.0.0",
+  "description": "Socket.io relay server for Terraforming Mars multiplayer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev":   "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
