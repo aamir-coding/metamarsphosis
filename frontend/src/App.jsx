@@ -865,6 +865,7 @@ function makePlayer(p, i, corpOpts){
 function createInitialState(playerList){
   const pool=[...CORPS].sort(()=>Math.random()-0.5);
   return {
+    started:false,
     phase:"corpSelection",
     generation:1, activePlayerIdx:0,
     temperature:-30, oxygen:0, oceansPlaced:0,
@@ -2813,11 +2814,12 @@ export default function App(){
   // Screen transitions driven by game phase
   useEffect(()=>{
     if(!gs) return;
+    if(!gs.started){ setScreen("lobby"); return; }
     if(gs.phase==="corpSelection") setScreen("corp");
     else if(gs.phase==="research")   setScreen("research");
     else if(gs.phase==="action"||gs.phase==="production") setScreen("game");
     else if(gs.gameOver)             setScreen("end");
-  },[gs?.phase, gs?.gameOver]);
+  },[gs?.phase, gs?.gameOver, gs?.started]);
 
   // ── Broadcast (host → all via server) ──────────────────────────────
   const broadcast=useCallback((ns)=>{
@@ -2974,7 +2976,7 @@ export default function App(){
             <button onClick={()=>{
                 const cur=gsRef.current;
                 if(!cur||cur.players.length<2) return setErr("Need 2–5 players");
-                const ns=createInitialState(cur.players.map(p=>({id:p.id,name:p.name})));
+                const ns={...createInitialState(cur.players.map(p=>({id:p.id,name:p.name}))),started:true};
                 broadcast(ns);
               }}
               disabled={!cur_players_ok(gs)}
