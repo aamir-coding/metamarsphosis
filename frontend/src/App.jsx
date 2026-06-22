@@ -1328,7 +1328,7 @@ function calcScores(state){
 // ═══════════════════════════════════════════════════════════════════════
 const T={
   bg:"#050311",surf:"#0c0a1e",surfH:"#141030",surfB:"#1c1840",
-  text:"#e8e2f8",muted:"#5e5680",border:"#26204a",
+  text:"#e8e2f8",muted:"#a39bc9",border:"#332c5c",
   red:"#e05535",green:"#28a860",blue:"#2272b0",gold:"#f0c040",
   orange:"#d97020",purple:"#9255d0",
   mars:"#b83808",marsMid:"#7a2400",marsDark:"#2c0d00",
@@ -1339,7 +1339,7 @@ const B=(props)=><button {...props} style={{
   background:props.disabled?T.surfH:props.bg||`linear-gradient(160deg,${T.surfB},${T.surf})`,
   color:props.disabled?T.muted:props.col||T.text,
   border:`1px solid ${props.disabled?T.border+"44":T.border}`,
-  borderRadius:7,padding:"7px 14px",fontSize:12,fontWeight:600,letterSpacing:"0.2px",
+  borderRadius:7,padding:"7px 14px",fontSize:15,fontWeight:600,letterSpacing:"0.2px",
   cursor:props.disabled?"not-allowed":"pointer",
   fontFamily:"'Exo 2',sans-serif",transition:"filter .15s",
   boxShadow:props.disabled?"none":"0 2px 10px #00000050,inset 0 1px 0 #ffffff08",
@@ -1362,16 +1362,16 @@ const TYPE_LABEL={green:"AUTO",blue:"ACTIVE",red:"EVENT"};
 function Res({k,v,prod}){
   const clr=RES_COLOR[k]||T.text;
   return(
-    <div style={{textAlign:"center",minWidth:40}}>
-      <div style={{width:32,height:32,borderRadius:"50%",
+    <div style={{textAlign:"center",minWidth:46}}>
+      <div style={{width:38,height:38,borderRadius:"50%",
         background:`radial-gradient(circle at 35% 35%,${clr}28,${clr}08)`,
         border:`1.5px solid ${clr}55`,display:"flex",alignItems:"center",
-        justifyContent:"center",margin:"0 auto 3px",fontSize:15,lineHeight:1}}>
+        justifyContent:"center",margin:"0 auto 3px",fontSize:18,lineHeight:1}}>
         {RES_ICON[k]}
       </div>
-      <div style={{color:clr,fontWeight:700,fontSize:13,lineHeight:1}}>{v}</div>
+      <div style={{color:clr,fontWeight:700,fontSize:16,lineHeight:1}}>{v}</div>
       {prod!==undefined&&(
-        <div style={{color:prod>0?clr:prod<0?T.red:T.muted,fontSize:10,marginTop:1,fontWeight:600}}>
+        <div style={{color:prod>0?clr:prod<0?T.red:T.muted,fontSize:13,marginTop:1,fontWeight:600}}>
           {prod>0?"+":""}{prod}
         </div>
       )}
@@ -1459,7 +1459,7 @@ function HexBoard({state,myPid,onHexClick}){
   const pendingColor=pt?tileTypeColor[pt.type]||T.gold:T.gold;
 
   return(
-    <div style={{position:"relative",width:"100%",maxWidth:560,margin:"0 auto"}}>
+    <div style={{position:"relative",width:"100%",maxWidth:760,margin:"0 auto"}}>
       {/* Board glow border */}
       <div style={{borderRadius:10,overflow:"hidden",
         boxShadow:`0 0 32px #00000080, 0 0 2px ${T.border}`,
@@ -1478,7 +1478,7 @@ function HexBoard({state,myPid,onHexClick}){
       </div>
       {/* Bonus-icon legend */}
       <div style={{display:"flex",gap:10,flexWrap:"wrap",justifyContent:"center",
-        padding:"5px 4px 0",fontSize:9,color:T.muted}}>
+        padding:"5px 4px 0",fontSize:12,color:T.muted}}>
         <span>⬡ Steel</span><span>△ Titanium</span><span>🌿 Plant</span>
         <span>₡ MC</span><span>📜 Card</span><span>~ Ocean spot</span>
       </div>
@@ -1489,7 +1489,7 @@ function HexBoard({state,myPid,onHexClick}){
           background:`linear-gradient(135deg,${pendingColor}33,${pendingColor}11)`,
           border:`1.5px solid ${pendingColor}88`,
           borderRadius:8,padding:"5px 14px",
-          color:pendingColor,fontSize:11,fontWeight:700,letterSpacing:"1px",
+          color:pendingColor,fontSize:14,fontWeight:700,letterSpacing:"1px",
           backdropFilter:"blur(4px)",pointerEvents:"none",
           boxShadow:`0 0 16px ${pendingColor}44`,
         }}>
@@ -1501,7 +1501,7 @@ function HexBoard({state,myPid,onHexClick}){
           position:"absolute",top:8,left:"50%",transform:"translateX(-50%)",
           background:"#00000099",border:`1px solid ${T.border}`,
           borderRadius:8,padding:"4px 12px",
-          color:T.muted,fontSize:11,backdropFilter:"blur(4px)",pointerEvents:"none",
+          color:T.muted,fontSize:14,backdropFilter:"blur(4px)",pointerEvents:"none",
         }}>
           {state.players.find(p=>p.id===pt.pid)?.name} is placing {pt.type}…
         </div>
@@ -1518,16 +1518,16 @@ function CardView({cardId,mini=false,selected=false,onClick,disabled=false}){
   if(mini) return(
     <div onClick={disabled?null:onClick} title={card.name}
       style={{borderRadius:6,overflow:"hidden",cursor:disabled||!onClick?"default":"pointer",
-        opacity:disabled?.45:1,width:68,flexShrink:0,
+        opacity:disabled?.45:1,width:80,flexShrink:0,
         border:`1.5px solid ${selected?"#f0c040":acc+"88"}`,
         background:selected?acc+"18":T.surfH,
         boxShadow:selected?`0 0 10px ${acc}44`:"none"}}>
       <div style={{height:3,background:acc}}/>
       <div style={{padding:"3px 5px"}}>
-        <div style={{fontSize:10,color:T.gold,fontWeight:700,lineHeight:1}}>{card.cost}₡</div>
-        <div style={{fontSize:9,color:T.text,fontWeight:600,lineHeight:1.25,marginTop:1,
+        <div style={{fontSize:13,color:T.gold,fontWeight:700,lineHeight:1}}>{card.cost}₡</div>
+        <div style={{fontSize:12,color:T.text,fontWeight:600,lineHeight:1.25,marginTop:1,
           overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{card.name}</div>
-        <div style={{fontSize:9,color:T.muted,marginTop:2,lineHeight:1}}>
+        <div style={{fontSize:12,color:T.muted,marginTop:2,lineHeight:1}}>
           {card.tags.map(t=>TAG_ICON[t]||t[0]).join("")}
         </div>
       </div>
@@ -1544,29 +1544,29 @@ function CardView({cardId,mini=false,selected=false,onClick,disabled=false}){
       {/* Type stripe + cost */}
       <div style={{background:`linear-gradient(90deg,${acc}cc,${acc}44)`,
         padding:"4px 10px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-        <span style={{fontSize:9,fontWeight:700,letterSpacing:"1px",color:"#fff",opacity:.85}}>{lbl}</span>
-        <span style={{fontSize:12,fontWeight:800,color:T.gold,fontFamily:"'Orbitron',sans-serif"}}>{card.cost}₡</span>
+        <span style={{fontSize:12,fontWeight:700,letterSpacing:"1px",color:"#fff",opacity:.85}}>{lbl}</span>
+        <span style={{fontSize:15,fontWeight:800,color:T.gold,fontFamily:"'Orbitron',sans-serif"}}>{card.cost}₡</span>
       </div>
       {/* Body */}
       <div style={{padding:"7px 10px"}}>
         {/* Tags */}
         <div style={{display:"flex",gap:3,flexWrap:"wrap",marginBottom:4}}>
           {card.tags.map(t=>(
-            <span key={t} style={{fontSize:9,background:T.surfB,border:`1px solid ${T.border}`,
+            <span key={t} style={{fontSize:12,background:T.surfB,border:`1px solid ${T.border}`,
               borderRadius:3,padding:"1px 5px",color:T.muted,display:"flex",alignItems:"center",gap:2}}>
               {TAG_ICON[t]||""} {t}
             </span>
           ))}
         </div>
         {/* Name */}
-        <div style={{fontSize:12,fontWeight:700,color:T.text,marginBottom:4,lineHeight:1.2}}>{card.name}</div>
+        <div style={{fontSize:15,fontWeight:700,color:T.text,marginBottom:4,lineHeight:1.2}}>{card.name}</div>
         {/* Desc */}
-        <div style={{fontSize:10,color:T.muted,lineHeight:1.45}}>{card.desc}</div>
+        <div style={{fontSize:13,color:T.muted,lineHeight:1.45}}>{card.desc}</div>
         {/* VP badge */}
         {card.vp&&typeof card.vp==="number"&&card.vp>0&&(
           <div style={{marginTop:5,display:"inline-block",background:T.purple+"33",
             border:`1px solid ${T.purple}66`,borderRadius:4,padding:"1px 7px",
-            fontSize:10,color:T.purple,fontWeight:700}}>{card.vp} VP</div>
+            fontSize:13,color:T.purple,fontWeight:700}}>{card.vp} VP</div>
         )}
       </div>
     </div>
@@ -1578,45 +1578,44 @@ function PlayerPanel({player,isActive,isMe}){
   const corp=player.corporation;
   return(
     <div style={{
-      borderRadius:9,padding:"8px 10px",marginBottom:6,
+      borderRadius:9,padding:"9px 11px",height:"100%",boxSizing:"border-box",
       background:isActive?`linear-gradient(135deg,${T.surfH},${T.surf})`:`linear-gradient(135deg,${T.surf},${T.bg})`,
       border:`1.5px solid ${isActive?player.color:T.border}`,
       boxShadow:isActive?`0 0 16px ${player.color}30`:"none",
       transition:"box-shadow .3s",
     }}>
-      {/* Name row */}
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:5}}>
-        <div style={{display:"flex",alignItems:"center",gap:6}}>
-          <span style={{width:8,height:8,borderRadius:"50%",background:player.color,
+      {/* Name + TR row */}
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:2}}>
+        <div style={{display:"flex",alignItems:"center",gap:6,minWidth:0}}>
+          <span style={{width:9,height:9,borderRadius:"50%",background:player.color,
             flexShrink:0,boxShadow:isActive?`0 0 6px ${player.color}`:"none"}}/>
-          <span style={{fontSize:12,fontWeight:700,color:isActive?player.color:T.text}}>
+          <span style={{fontSize:16,fontWeight:700,color:isActive?player.color:T.text,
+            whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>
             {player.name}{isMe?<span style={{color:T.muted,fontWeight:400}}> (you)</span>:""}
           </span>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:8}}>
-          {corp&&<span style={{fontSize:10,color:T.muted}}>{corp.name}</span>}
-          <span style={{
-            background:`linear-gradient(135deg,${T.gold}33,${T.gold}11)`,
-            border:`1px solid ${T.gold}44`,borderRadius:4,padding:"1px 7px",
-            fontSize:11,fontWeight:700,color:T.gold,fontFamily:"'Orbitron',sans-serif",
-          }}>TR {player.TR}</span>
-        </div>
+        <span style={{flexShrink:0,marginLeft:8,
+          background:`linear-gradient(135deg,${T.gold}33,${T.gold}11)`,
+          border:`1px solid ${T.gold}44`,borderRadius:4,padding:"1px 7px",
+          fontSize:14,fontWeight:700,color:T.gold,fontFamily:"'Orbitron',sans-serif",
+        }}>TR {player.TR}</span>
       </div>
+      {/* Corp name — own line, so it never fights the TR badge for space */}
+      {corp&&<div style={{fontSize:13,color:T.muted,marginBottom:6,
+        whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{corp.name}</div>}
       {/* Resources */}
       <div style={{display:"flex",gap:4,flexWrap:"wrap"}}>
         {["mc","steel","titanium","plants","energy","heat"].map(k=>(
           <Res key={k} k={k} v={player[k]} prod={player[k+"Prod"]}/>
         ))}
       </div>
-      {/* Tag counts — visible for every player, not just yourself, since this
-          drives milestone (Builder) and award (Scientist) strategy decisions */}
       {Object.keys(player.tags||{}).length>0&&(
         <div style={{display:"flex",gap:5,flexWrap:"wrap",marginTop:6,
           paddingTop:6,borderTop:`1px solid ${T.border}66`}}>
           {Object.entries(player.tags||{}).filter(([,v])=>v>0).map(([tag,count])=>(
             <span key={tag} title={tag} style={{
               background:T.surfB,border:`1px solid ${T.border}`,borderRadius:4,
-              padding:"1px 6px",fontSize:10,color:T.muted,
+              padding:"1px 6px",fontSize:13,color:T.muted,
               display:"flex",alignItems:"center",gap:3}}>
               {TAG_ICON[tag]||tag[0]}<span style={{color:T.text,fontWeight:600}}>{count}</span>
             </span>
@@ -1624,7 +1623,7 @@ function PlayerPanel({player,isActive,isMe}){
         </div>
       )}
       {isActive&&player.actionsLeft>0&&(
-        <div style={{marginTop:5,fontSize:10,color:player.color,fontWeight:600}}>
+        <div style={{marginTop:5,fontSize:13,color:player.color,fontWeight:600}}>
           ● {player.actionsLeft} action{player.actionsLeft!==1?"s":""} remaining
         </div>
       )}
@@ -1643,10 +1642,10 @@ function GlobalBar({state}){
     return(
       <div style={{flex:1,minWidth:110}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:3}}>
-          <span style={{fontSize:11,color:done?color:T.muted,fontWeight:600,letterSpacing:"0.3px"}}>
+          <span style={{fontSize:14,color:done?color:T.muted,fontWeight:600,letterSpacing:"0.3px"}}>
             {done?"✓ ":""}{icon}
           </span>
-          <span style={{fontSize:12,color:done?color:T.text,fontWeight:700,
+          <span style={{fontSize:15,color:done?color:T.text,fontWeight:700,
             fontFamily:"'Orbitron',sans-serif",letterSpacing:"0.5px"}}>{val}</span>
         </div>
         <div style={{height:5,background:T.surfB,borderRadius:3,overflow:"hidden",
@@ -1671,14 +1670,14 @@ function GlobalBar({state}){
       <div style={{fontFamily:"'Orbitron',sans-serif",
         background:`linear-gradient(135deg,${T.gold},${T.orange})`,
         WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
-        fontSize:14,fontWeight:700,flexShrink:0,letterSpacing:"1px"}}>
+        fontSize:17,fontWeight:700,flexShrink:0,letterSpacing:"1px"}}>
         GEN {state.generation}
       </div>
       <Param icon="🌡 TEMP" val={`${state.temperature}°C`} pct={tempPct}  color={T.red}   done={state.temperature>=8}/>
       <Param icon="🌿 OXY"  val={`${state.oxygen}%`}       pct={oxyPct}   color={T.green} done={state.oxygen>=14}/>
       <Param icon="🌊 SEA"  val={`${state.oceansPlaced}/9`} pct={oceanPct} color={T.blue}  done={state.oceansPlaced>=9}/>
       {allDone&&(
-        <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:10,letterSpacing:"2px",
+        <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:13,letterSpacing:"2px",
           background:`linear-gradient(90deg,${T.gold},${T.orange},${T.gold})`,
           backgroundSize:"200%",animation:"shimmer 2s linear infinite",
           WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",fontWeight:700}}>
@@ -1722,16 +1721,16 @@ function ActionPanel({state,myPid,send}){
           alignItems:"center",padding:"7px 12px",marginBottom:open?0:4,
           background:open?T.surfH:T.surfB,color:disabled?T.muted:T.text,
           border:`1px solid ${open?T.border+"99":T.border}`,
-          borderRadius:open?"7px 7px 0 0":7,fontSize:11,fontWeight:700,
+          borderRadius:open?"7px 7px 0 0":7,fontSize:14,fontWeight:700,
           letterSpacing:"0.5px",textTransform:"uppercase",cursor:disabled?"not-allowed":"pointer",
           fontFamily:"'Exo 2',sans-serif",
         }}>
         <span>{label}</span>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           {badge&&<span style={{background:T.surfB,border:`1px solid ${T.border}`,
-            borderRadius:4,padding:"1px 7px",fontSize:10,color:T.muted,fontWeight:600}}>
+            borderRadius:4,padding:"1px 7px",fontSize:13,color:T.muted,fontWeight:600}}>
             {badge}</span>}
-          <span style={{color:T.muted,fontSize:10}}>{open?"▲":"▼"}</span>
+          <span style={{color:T.muted,fontSize:13}}>{open?"▲":"▼"}</span>
         </div>
       </button>
     );
@@ -1752,13 +1751,13 @@ function ActionPanel({state,myPid,send}){
       {p.passed?(
         <div style={{textAlign:"center",padding:"16px 12px",
           background:T.surfH,borderRadius:8,border:`1px solid ${T.border}`,
-          color:T.muted,fontSize:12,fontWeight:600}}>
+          color:T.muted,fontSize:15,fontWeight:600}}>
           ✓ Passed this round
         </div>
       ):(
         <div style={{textAlign:"center",padding:"16px 12px",
           background:T.surfH,borderRadius:8,border:`1px solid ${T.border}`,
-          color:T.muted,fontSize:12,fontWeight:600}}>
+          color:T.muted,fontSize:15,fontWeight:600}}>
           ⏳ {state.players[state.activePlayerIdx]?.name}'s turn
         </div>
       )}
@@ -1772,7 +1771,7 @@ function ActionPanel({state,myPid,send}){
       <div style={{textAlign:"center",padding:"14px 12px",marginBottom:10,
         background:`linear-gradient(135deg,${T.gold}18,${T.gold}06)`,
         border:`1px solid ${T.gold}44`,borderRadius:8,
-        color:T.gold,fontSize:12,fontWeight:600}}>
+        color:T.gold,fontSize:15,fontWeight:600}}>
         You've used both actions this turn
       </div>
       <button onClick={()=>send({t:"pass",pid:myPid})}
@@ -1780,7 +1779,7 @@ function ActionPanel({state,myPid,send}){
           width:"100%",padding:"10px 12px",
           background:`linear-gradient(135deg,${T.mars}33,${T.mars}11)`,
           border:`1.5px solid ${T.mars}66`,borderRadius:7,
-          color:"#e08070",fontSize:12,fontWeight:700,cursor:"pointer",
+          color:"#e08070",fontSize:15,fontWeight:700,cursor:"pointer",
           fontFamily:"'Exo 2',sans-serif",letterSpacing:"0.5px",
         }}>
         ⏹ Pass — End My Turn
@@ -1789,14 +1788,14 @@ function ActionPanel({state,myPid,send}){
   );
 
   return(
-    <div style={{fontSize:12}}>
+    <div style={{fontSize:15}}>
 
       {/* Pending tile notice */}
       {state.pendingTile&&state.pendingTile.pid===myPid&&(
         <div style={{
           borderRadius:7,padding:"8px 12px",marginBottom:10,
           background:`linear-gradient(135deg,${T.gold}18,${T.gold}08)`,
-          border:`1.5px solid ${T.gold}66`,color:T.gold,fontWeight:700,fontSize:12,
+          border:`1.5px solid ${T.gold}66`,color:T.gold,fontWeight:700,fontSize:15,
           boxShadow:`0 0 14px ${T.gold}22`,
         }}>
           🎯 Click a glowing hex on the board to place your {state.pendingTile.type}
@@ -1807,7 +1806,7 @@ function ActionPanel({state,myPid,send}){
         <>
           {/* Convert Resources */}
           <div style={{marginBottom:6}}>
-            <div style={{fontSize:9,fontWeight:700,letterSpacing:"2px",color:T.muted,
+            <div style={{fontSize:12,fontWeight:700,letterSpacing:"2px",color:T.muted,
               textTransform:"uppercase",marginBottom:5}}>Convert Resources</div>
             <div style={{display:"flex",gap:6}}>
               <button disabled={!canHeat}
@@ -1816,10 +1815,10 @@ function ActionPanel({state,myPid,send}){
                   background:canHeat?`linear-gradient(135deg,${T.red}33,${T.red}11)`:T.surfH,
                   border:`1.5px solid ${canHeat?T.red+"66":T.border}`,borderRadius:7,
                   color:canHeat?T.red:T.muted,cursor:canHeat?"pointer":"not-allowed",
-                  fontSize:11,fontWeight:700,fontFamily:"'Exo 2',sans-serif",
+                  fontSize:14,fontWeight:700,fontFamily:"'Exo 2',sans-serif",
                   boxShadow:canHeat?`0 0 12px ${T.red}33`:"none"}}>
                 8🔥→🌡
-                {!canHeat&&<div style={{fontSize:9,color:T.muted,marginTop:2}}>{p.heat}/8</div>}
+                {!canHeat&&<div style={{fontSize:12,color:T.muted,marginTop:2}}>{p.heat}/8</div>}
               </button>
               <button disabled={!canPlants}
                 onClick={()=>act({t:"plantsGreenery",pid:myPid})}
@@ -1827,10 +1826,10 @@ function ActionPanel({state,myPid,send}){
                   background:canPlants?`linear-gradient(135deg,${T.green}33,${T.green}11)`:T.surfH,
                   border:`1.5px solid ${canPlants?T.green+"66":T.border}`,borderRadius:7,
                   color:canPlants?T.green:T.muted,cursor:canPlants?"pointer":"not-allowed",
-                  fontSize:11,fontWeight:700,fontFamily:"'Exo 2',sans-serif",
+                  fontSize:14,fontWeight:700,fontFamily:"'Exo 2',sans-serif",
                   boxShadow:canPlants?`0 0 12px ${T.green}33`:"none"}}>
                 {plantThresh}🌿→🌿
-                {!canPlants&&<div style={{fontSize:9,color:T.muted,marginTop:2}}>{p.plants}/{plantThresh}</div>}
+                {!canPlants&&<div style={{fontSize:12,color:T.muted,marginTop:2}}>{p.plants}/{plantThresh}</div>}
               </button>
             </div>
           </div>
@@ -1841,7 +1840,7 @@ function ActionPanel({state,myPid,send}){
               style={{width:"100%",padding:"7px 12px",marginBottom:6,
                 background:`linear-gradient(135deg,${T.purple}33,${T.purple}11)`,
                 border:`1.5px solid ${T.purple}66`,borderRadius:7,
-                color:T.purple,fontSize:11,fontWeight:700,cursor:"pointer",
+                color:T.purple,fontSize:14,fontWeight:700,cursor:"pointer",
                 fontFamily:"'Exo 2',sans-serif",
                 boxShadow:`0 0 12px ${T.purple}33`}}>
               ⊕ UNMI Corp: pay 3₡ → +TR
@@ -1875,13 +1874,13 @@ function ActionPanel({state,myPid,send}){
                     border:`1px solid ${sp.canAfford&&sp.avail?T.border:T.border+"44"}`,
                     borderRadius:6,color:sp.canAfford&&sp.avail?T.text:T.muted,
                     cursor:sp.canAfford&&sp.avail?"pointer":"not-allowed",
-                    fontSize:11,fontFamily:"'Exo 2',sans-serif",
+                    fontSize:14,fontFamily:"'Exo 2',sans-serif",
                   }}>
                   <span>{sp.icon} {sp.label}</span>
                   <span style={{display:"flex",alignItems:"center",gap:8}}>
-                    <span style={{color:T.muted,fontSize:10}}>{sp.desc}</span>
+                    <span style={{color:T.muted,fontSize:13}}>{sp.desc}</span>
                     <span style={{color:sp.canAfford?T.gold:T.muted,fontWeight:700,
-                      fontFamily:"'Orbitron',sans-serif",fontSize:11}}>{sp.cost}₡</span>
+                      fontFamily:"'Orbitron',sans-serif",fontSize:14}}>{sp.cost}₡</span>
                   </span>
                 </button>
               ))}
@@ -1893,11 +1892,11 @@ function ActionPanel({state,myPid,send}){
                     style={{width:"100%",padding:"5px 10px",
                       background:sellMode?T.surfH:T.surfB,
                       border:`1px solid ${T.border}`,borderRadius:6,
-                      color:T.muted,fontSize:11,cursor:"pointer",
+                      color:T.muted,fontSize:14,cursor:"pointer",
                       fontFamily:"'Exo 2',sans-serif",
                       display:"flex",justifyContent:"space-between"}}>
                     <span>📜 Sell Patents (1₡ each)</span>
-                    <span style={{fontSize:10}}>{sellMode?"▲":"▼"}</span>
+                    <span style={{fontSize:13}}>{sellMode?"▲":"▼"}</span>
                   </button>
                   {sellMode&&(
                     <div style={{marginTop:4,maxHeight:120,overflowY:"auto"}}>
@@ -1909,8 +1908,8 @@ function ActionPanel({state,myPid,send}){
                             onChange={e=>setSellSel(e.target.checked
                               ?[...sellSel,id]:sellSel.filter(x=>x!==id))}
                             style={{accentColor:T.gold}}/>
-                          <span style={{fontSize:10,color:T.text}}>{CARDS[id]?.name||id}</span>
-                          <span style={{marginLeft:"auto",fontSize:10,color:T.muted}}>1₡</span>
+                          <span style={{fontSize:13,color:T.text}}>{CARDS[id]?.name||id}</span>
+                          <span style={{marginLeft:"auto",fontSize:13,color:T.muted}}>1₡</span>
                         </label>
                       ))}
                       <B disabled={!sellSel.length} full style={{marginTop:4}}
@@ -1944,7 +1943,7 @@ function ActionPanel({state,myPid,send}){
                       disabled={taken||!met||p.mc<8||state.milestonesClaimed>=3}
                       onClick={()=>act({t:"claimMilestone",pid:myPid,id:ms.id})}
                       style={{
-                        padding:"5px 10px",borderRadius:6,fontSize:11,fontWeight:700,
+                        padding:"5px 10px",borderRadius:6,fontSize:14,fontWeight:700,
                         cursor:taken||!met||p.mc<8||state.milestonesClaimed>=3?"not-allowed":"pointer",
                         background:met&&!taken?`linear-gradient(135deg,${T.gold}22,${T.gold}08)`:T.surfB,
                         border:`1px solid ${met&&!taken?T.gold+"55":T.border}`,
@@ -1954,10 +1953,10 @@ function ActionPanel({state,myPid,send}){
                       {taken?`✓ ${claimer?.name}`:met?"CLAIM":"✗"}
                     </button>
                     <div>
-                      <div style={{fontWeight:700,color:taken?T.green:T.text,fontSize:11}}>
+                      <div style={{fontWeight:700,color:taken?T.green:T.text,fontSize:14}}>
                         {ms.name}
                       </div>
-                      <div style={{color:T.muted,fontSize:10}}>{ms.req}</div>
+                      <div style={{color:T.muted,fontSize:13}}>{ms.req}</div>
                     </div>
                   </div>
                 );
@@ -1982,7 +1981,7 @@ function ActionPanel({state,myPid,send}){
                       disabled={funded||p.mc<cost||state.awardsFunded>=3}
                       onClick={()=>act({t:"fundAward",pid:myPid,id:aw.id})}
                       style={{
-                        padding:"5px 10px",borderRadius:6,fontSize:11,fontWeight:700,
+                        padding:"5px 10px",borderRadius:6,fontSize:14,fontWeight:700,
                         cursor:funded||p.mc<cost||state.awardsFunded>=3?"not-allowed":"pointer",
                         background:!funded&&p.mc>=cost?`linear-gradient(135deg,${T.purple}22,${T.purple}08)`:T.surfB,
                         border:`1px solid ${!funded&&p.mc>=cost?T.purple+"55":T.border}`,
@@ -1992,10 +1991,10 @@ function ActionPanel({state,myPid,send}){
                       {funded?`✓ ${funder?.name}`:cost+"₡"}
                     </button>
                     <div>
-                      <div style={{fontWeight:700,color:funded?T.purple:T.text,fontSize:11}}>
+                      <div style={{fontWeight:700,color:funded?T.purple:T.text,fontSize:14}}>
                         {aw.name}
                       </div>
-                      <div style={{color:T.muted,fontSize:10}}>{aw.desc}</div>
+                      <div style={{color:T.muted,fontSize:13}}>{aw.desc}</div>
                     </div>
                   </div>
                 );
@@ -2009,7 +2008,7 @@ function ActionPanel({state,myPid,send}){
               width:"100%",padding:"9px 12px",marginTop:6,
               background:`linear-gradient(135deg,${T.mars}33,${T.mars}11)`,
               border:`1.5px solid ${T.mars}66`,borderRadius:7,
-              color:"#e08070",fontSize:12,fontWeight:700,cursor:"pointer",
+              color:"#e08070",fontSize:15,fontWeight:700,cursor:"pointer",
               fontFamily:"'Exo 2',sans-serif",letterSpacing:"0.5px",
               boxShadow:`0 0 12px ${T.mars}22`,
             }}>
@@ -2044,7 +2043,7 @@ function HandPanel({state,myPid,send}){
     <div style={{textAlign:"center",padding:"16px 12px",
       background:`linear-gradient(135deg,${T.gold}18,${T.gold}06)`,
       border:`1px solid ${T.gold}44`,borderRadius:8,
-      color:T.gold,fontSize:12,fontWeight:600}}>
+      color:T.gold,fontSize:15,fontWeight:600}}>
       🎯 Place your {state.pendingTile.type} on the board first — head to the Actions tab or click a glowing hex.
     </div>
   );
@@ -2058,7 +2057,7 @@ function HandPanel({state,myPid,send}){
   });
 
   if(!p.hand.length) return(
-    <div style={{color:T.muted,fontSize:12,textAlign:"center",padding:"12px 0"}}>No cards in hand</div>
+    <div style={{color:T.muted,fontSize:15,textAlign:"center",padding:"12px 0"}}>No cards in hand</div>
   );
 
   const card=selected?CARDS[selected]:null;
@@ -2083,14 +2082,14 @@ function HandPanel({state,myPid,send}){
     .filter(c=>c?.action);
 
   return(
-    <div style={{fontSize:12}}>
+    <div style={{fontSize:15}}>
       {/* Search bar */}
       <div style={{display:"flex",gap:6,alignItems:"center",marginBottom:8}}>
         <input value={filter} onChange={e=>setFilter(e.target.value)}
-          placeholder="🔍 Search cards…" style={{...INP_S,padding:"5px 10px",fontSize:12,flex:1}}/>
+          placeholder="🔍 Search cards…" style={{...INP_S,padding:"5px 10px",fontSize:15,flex:1}}/>
         {filter&&<button onClick={()=>setFilter("")}
-          style={{background:"none",border:"none",color:T.muted,cursor:"pointer",fontSize:14}}>✕</button>}
-        <span style={{color:T.muted,fontSize:11,whiteSpace:"nowrap"}}>{hand.length}/{p.hand.length}</span>
+          style={{background:"none",border:"none",color:T.muted,cursor:"pointer",fontSize:17}}>✕</button>}
+        <span style={{color:T.muted,fontSize:14,whiteSpace:"nowrap"}}>{hand.length}/{p.hand.length}</span>
       </div>
 
       <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:8}}>
@@ -2100,7 +2099,7 @@ function HandPanel({state,myPid,send}){
             onClick={()=>{setSelected(id===selected?null:id);setSteelPay(0);setTiPay(0);setHeatPay(0);}}
             disabled={!isMyTurn}/>
         ))}
-        {hand.length===0&&filter&&<div style={{color:T.muted,fontSize:11}}>No cards match "{filter}"</div>}
+        {hand.length===0&&filter&&<div style={{color:T.muted,fontSize:14}}>No cards match "{filter}"</div>}
       </div>
 
       {selected&&card&&(
@@ -2108,7 +2107,7 @@ function HandPanel({state,myPid,send}){
           border:`1px solid ${TYPE_CLR[card.type]||T.border}`}}>
           <div style={{fontWeight:700,marginBottom:4}}>{card.name} — {card.cost}₡</div>
           <div style={{color:T.muted,marginBottom:6,lineHeight:1.4}}>{card.desc}</div>
-          {card.req&&<div style={{color:metReq?T.green:T.red,fontSize:11,marginBottom:6,fontWeight:600}}>
+          {card.req&&<div style={{color:metReq?T.green:T.red,fontSize:14,marginBottom:6,fontWeight:600}}>
             {metReq?"✓ Requirement met":"✗ Requirement not met"}
           </div>}
           {maxSteel>0&&(
@@ -2133,7 +2132,7 @@ function HandPanel({state,myPid,send}){
               <button onClick={()=>setHeatPay(Math.max(0,heatPay-1))} style={{padding:"2px 8px",background:T.surfB,border:`1px solid ${T.border}`,borderRadius:4,color:T.text,cursor:"pointer"}}>−</button>
               <span style={{margin:"0 8px",color:T.red}}>{heatPay}</span>
               <button onClick={()=>setHeatPay(Math.min(maxHeat,heatPay+1))} style={{padding:"2px 8px",background:T.surfB,border:`1px solid ${T.border}`,borderRadius:4,color:T.red,cursor:"pointer"}}>+</button>
-              <span style={{color:T.muted,marginLeft:4,fontSize:10}}>(have {p.heat}🔥)</span>
+              <span style={{color:T.muted,marginLeft:4,fontSize:13}}>(have {p.heat}🔥)</span>
             </div>
           )}
           <div style={{display:"flex",gap:6,alignItems:"center"}}>
@@ -2175,7 +2174,7 @@ function HandPanel({state,myPid,send}){
       {/* Played cards with resources */}
       {p.played.filter(id=>!id.endsWith("_fd")).length>0&&(
         <div style={{marginTop:10}}>
-          <div style={{color:T.muted,fontSize:11,marginBottom:4}}>Played tableau:</div>
+          <div style={{color:T.muted,fontSize:14,marginBottom:4}}>Played tableau:</div>
           <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
             {p.played.filter(id=>!id.endsWith("_fd")).map(id=>{
               const card=CARDS[id]; if(!card) return null;
@@ -2183,7 +2182,7 @@ function HandPanel({state,myPid,send}){
               const vpNow=typeof card.vp==="function"?card.vp(p):(card.vp||0);
               return(
                 <div key={id} style={{background:T.surf,border:`1px solid ${TYPE_CLR[card.type]||T.border}`,
-                  borderRadius:4,padding:"3px 7px",fontSize:10,color:T.muted}}>
+                  borderRadius:4,padding:"3px 7px",fontSize:13,color:T.muted}}>
                   {card.name}
                   {res>0&&<span style={{color:T.green,marginLeft:4}}>{res}🦠</span>}
                   {vpNow>0&&<span style={{color:T.gold,marginLeft:4}}>{vpNow}VP</span>}
@@ -2207,7 +2206,7 @@ function ResearchScreen({state,myPid,send}){
   if(p.doneResearch) return(
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",
       justifyContent:"center",minHeight:"60vh",gap:14}}>
-      <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:14,fontWeight:700,
+      <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:17,fontWeight:700,
         color:T.gold,letterSpacing:"2px"}}>Research Done</div>
       <div style={{display:"flex",gap:6}}>
         {state.players.map(x=>(
@@ -2217,7 +2216,7 @@ function ResearchScreen({state,myPid,send}){
             transition:"all .3s"}}/>
         ))}
       </div>
-      <div style={{color:T.muted,fontSize:12}}>
+      <div style={{color:T.muted,fontSize:15}}>
         {state.players.filter(x=>x.doneResearch).length}/{state.players.length} ready
       </div>
     </div>
@@ -2237,17 +2236,17 @@ function ResearchScreen({state,myPid,send}){
           color:T.gold,marginBottom:4}}>
           RESEARCH PHASE
         </div>
-        <div style={{color:T.muted,fontSize:12,letterSpacing:"1px"}}>
+        <div style={{color:T.muted,fontSize:15,letterSpacing:"1px"}}>
           Generation {state.generation} — Buy cards for 3₡ each
         </div>
         <div style={{marginTop:8,display:"inline-flex",gap:20,
           background:T.surfH,borderRadius:8,padding:"6px 20px",
           border:`1px solid ${T.border}`}}>
-          <span style={{fontSize:12,color:T.muted}}>
+          <span style={{fontSize:15,color:T.muted}}>
             Your MC: <b style={{color:T.gold,fontFamily:"'Orbitron',sans-serif"}}>{p.mc}₡</b>
           </span>
           <span style={{color:T.border}}>|</span>
-          <span style={{fontSize:12,color:T.muted}}>
+          <span style={{fontSize:15,color:T.muted}}>
             Cost: <b style={{color:canAfford?T.green:T.red}}>{cost}₡</b>
           </span>
         </div>
@@ -2280,7 +2279,7 @@ function ResearchScreen({state,myPid,send}){
               ?`linear-gradient(135deg,${T.green},#1a6030)`
               :T.surfH,
             color:canAfford||chosen.length===0?"#fff":T.muted,
-            fontSize:14,fontWeight:700,padding:"12px 32px",
+            fontSize:17,fontWeight:700,padding:"12px 32px",
             letterSpacing:"1px",
             boxShadow:canAfford||chosen.length===0?`0 4px 20px ${T.green}44`:"none",
           }}>
@@ -2316,7 +2315,7 @@ function EndScreen({state}){
           marginBottom:8}}>
           MARS TERRAFORMED
         </div>
-        <div style={{color:T.muted,fontSize:11,letterSpacing:"3px",textTransform:"uppercase"}}>
+        <div style={{color:T.muted,fontSize:14,letterSpacing:"3px",textTransform:"uppercase"}}>
           Temp {state.temperature}°C · O₂ {state.oxygen}% · {state.oceansPlaced} Oceans · Gen {state.generation}
         </div>
       </div>
@@ -2346,12 +2345,12 @@ function EndScreen({state}){
                     <span style={{width:10,height:10,borderRadius:"50%",
                       background:s.color,flexShrink:0,
                       boxShadow:isWin?`0 0 8px ${s.color}`:"none"}}/>
-                    <span style={{fontWeight:700,fontSize:15,color:isWin?T.text:T.text}}>
+                    <span style={{fontWeight:700,fontSize:18,color:isWin?T.text:T.text}}>
                       {s.name}
                     </span>
-                    <span style={{color:T.muted,fontSize:11}}>{s.corp}</span>
+                    <span style={{color:T.muted,fontSize:14}}>{s.corp}</span>
                   </div>
-                  <div style={{color:T.muted,fontSize:11}}>
+                  <div style={{color:T.muted,fontSize:14}}>
                     TR {s.TR} · {s.tiles} tiles
                   </div>
                 </div>
@@ -2361,9 +2360,9 @@ function EndScreen({state}){
                     color:isWin?T.gold:T.text}}>
                     {s.score}
                   </div>
-                  <div style={{color:T.muted,fontSize:10}}>VP</div>
+                  <div style={{color:T.muted,fontSize:13}}>VP</div>
                 </div>
-                <div style={{color:T.muted,fontSize:11,marginLeft:4}}>
+                <div style={{color:T.muted,fontSize:14,marginLeft:4}}>
                   {open?"▲":"▼"}
                 </div>
               </div>
@@ -2388,14 +2387,14 @@ function EndScreen({state}){
                       <div key={label} style={{
                         background:T.surf,borderRadius:6,padding:"6px 10px",
                         border:`1px solid ${T.border}`}}>
-                        <div style={{color:T.muted,fontSize:10,marginBottom:2}}>{label}</div>
-                        <div style={{color:clr,fontWeight:700,fontSize:16,
+                        <div style={{color:T.muted,fontSize:13,marginBottom:2}}>{label}</div>
+                        <div style={{color:clr,fontWeight:700,fontSize:19,
                           fontFamily:"'Orbitron',sans-serif"}}>{val}</div>
                       </div>
                     ))}
                   </div>
                   {s.breakdown.cardDetail.length>0&&(
-                    <div style={{fontSize:11,color:T.muted,lineHeight:1.7}}>
+                    <div style={{fontSize:14,color:T.muted,lineHeight:1.7}}>
                       {s.breakdown.cardDetail.map(c=>(
                         <span key={c.name} style={{marginRight:10}}>
                           <span style={{color:T.orange}}>+{c.vp}</span> {c.name}
@@ -2410,7 +2409,7 @@ function EndScreen({state}){
         })}
       </div>
 
-      <div style={{color:T.muted,fontSize:11,marginTop:20,letterSpacing:"1px"}}>
+      <div style={{color:T.muted,fontSize:14,marginTop:20,letterSpacing:"1px"}}>
         Tap a row to see VP breakdown · Refresh to play again
       </div>
     </div>
@@ -2429,18 +2428,18 @@ function CorpSelection({state,myPid,send}){
   if(p.corpChosen) return(
     <div style={{display:"flex",flexDirection:"column",alignItems:"center",
       justifyContent:"center",minHeight:"60vh",gap:16}}>
-      <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:16,fontWeight:700,
+      <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:19,fontWeight:700,
         color:T.gold,letterSpacing:"2px"}}>Corporation Selected</div>
       <div style={{display:"flex",gap:6}}>
         {state.players.map(x=>(
-          <div key={x.id} style={{width:32,height:32,borderRadius:"50%",
+          <div key={x.id} style={{width:38,height:38,borderRadius:"50%",
             background:x.corpChosen?x.color:T.surfH,
             border:`2px solid ${x.corpChosen?x.color:T.border}`,
             boxShadow:x.corpChosen?`0 0 10px ${x.color}66`:"none",
             transition:"all .3s"}}/>
         ))}
       </div>
-      <div style={{color:T.muted,fontSize:12,letterSpacing:"1px"}}>
+      <div style={{color:T.muted,fontSize:15,letterSpacing:"1px"}}>
         {chosen} / {total} players ready
       </div>
     </div>
@@ -2457,7 +2456,7 @@ function CorpSelection({state,myPid,send}){
           marginBottom:6}}>
           CHOOSE YOUR CORPORATION
         </div>
-        <div style={{color:T.muted,fontSize:12,letterSpacing:"2px"}}>
+        <div style={{color:T.muted,fontSize:15,letterSpacing:"2px"}}>
           Each corporation gives you a unique starting position and ability
         </div>
       </div>
@@ -2489,7 +2488,7 @@ function CorpSelection({state,myPid,send}){
               <div style={{padding:"16px 18px"}}>
                 {/* Corp name */}
                 <div style={{fontFamily:"'Orbitron',sans-serif",fontWeight:700,
-                  fontSize:15,color:corp.color||T.text,
+                  fontSize:18,color:corp.color||T.text,
                   letterSpacing:"1px",marginBottom:10}}>
                   {corp.name}
                 </div>
@@ -2498,27 +2497,27 @@ function CorpSelection({state,myPid,send}){
                   <span style={{
                     background:`linear-gradient(135deg,${T.gold}22,${T.gold}08)`,
                     border:`1px solid ${T.gold}44`,borderRadius:5,
-                    padding:"3px 10px",fontSize:12,color:T.gold,fontWeight:700,
+                    padding:"3px 10px",fontSize:15,color:T.gold,fontWeight:700,
                     fontFamily:"'Orbitron',sans-serif"}}>
                     {corp.startMC}₡
                   </span>
                   {corp.startRes&&Object.entries(corp.startRes).map(([k,v])=>(
                     <span key={k} style={{background:T.surfH,border:`1px solid ${T.border}`,
-                      borderRadius:5,padding:"3px 9px",fontSize:11,color:T.text,
+                      borderRadius:5,padding:"3px 9px",fontSize:14,color:T.text,
                       display:"flex",alignItems:"center",gap:3}}>
                       {v}{RES_ICON[k]}
                     </span>
                   ))}
                   {corp.startProd&&Object.entries(corp.startProd).map(([k,v])=>(
                     <span key={k} style={{background:T.surfH,border:`1px solid ${T.border}`,
-                      borderRadius:5,padding:"3px 9px",fontSize:11,color:T.green,
+                      borderRadius:5,padding:"3px 9px",fontSize:14,color:T.green,
                       display:"flex",alignItems:"center",gap:3}}>
-                      +{v}{RES_ICON[k]}<span style={{color:T.muted,fontSize:9}}>/gen</span>
+                      +{v}{RES_ICON[k]}<span style={{color:T.muted,fontSize:12}}>/gen</span>
                     </span>
                   ))}
                 </div>
                 {/* Description */}
-                <div style={{fontSize:12,color:T.muted,lineHeight:1.6,
+                <div style={{fontSize:15,color:T.muted,lineHeight:1.6,
                   borderTop:`1px solid ${T.border}`,paddingTop:10}}>
                   {corp.desc}
                 </div>
@@ -2535,9 +2534,9 @@ function MilestonesAwardsBar({state}){
   return(
     <div style={{display:"flex",gap:5,flexWrap:"wrap",padding:"6px 12px",
       borderTop:`1px solid ${T.border}`,
-      background:`linear-gradient(180deg,${T.surf},${T.bg})`,fontSize:10}}>
+      background:`linear-gradient(180deg,${T.surf},${T.bg})`,fontSize:13}}>
       <span style={{color:T.muted,fontWeight:600,alignSelf:"center",letterSpacing:"1px",
-        fontSize:9,textTransform:"uppercase",marginRight:2}}>Milestones</span>
+        fontSize:12,textTransform:"uppercase",marginRight:2}}>Milestones</span>
       {state.milestones.map(m=>{
         const c=state.players.find(p=>p.id===m.claimedBy);
         return(
@@ -2546,15 +2545,15 @@ function MilestonesAwardsBar({state}){
             border:`1px solid ${c?T.gold+"66":T.border}`,borderRadius:5,
             padding:"3px 8px",color:c?T.gold:T.muted,fontWeight:c?700:400,
             display:"flex",alignItems:"center",gap:4}}>
-            {c&&<span style={{fontSize:9}}>✓</span>}
+            {c&&<span style={{fontSize:12}}>✓</span>}
             {m.name}
-            {c&&<span style={{opacity:.65,fontSize:9}}>·{c.name}</span>}
+            {c&&<span style={{opacity:.65,fontSize:12}}>·{c.name}</span>}
           </div>
         );
       })}
       <span style={{color:T.border,alignSelf:"center",margin:"0 2px"}}>│</span>
       <span style={{color:T.muted,fontWeight:600,alignSelf:"center",letterSpacing:"1px",
-        fontSize:9,textTransform:"uppercase",marginRight:2}}>Awards</span>
+        fontSize:12,textTransform:"uppercase",marginRight:2}}>Awards</span>
       {state.awards.map((a,i)=>{
         const c=state.players.find(p=>p.id===a.fundedBy);
         const costs=[8,14,20];
@@ -2564,9 +2563,9 @@ function MilestonesAwardsBar({state}){
             border:`1px solid ${c?T.purple+"66":T.border}`,borderRadius:5,
             padding:"3px 8px",color:c?T.purple:T.muted,fontWeight:c?700:400,
             display:"flex",alignItems:"center",gap:4}}>
-            {c?<span style={{fontSize:9}}>✓</span>:<span style={{color:T.gold,fontSize:9}}>{costs[i]||"—"}₡</span>}
+            {c?<span style={{fontSize:12}}>✓</span>:<span style={{color:T.gold,fontSize:12}}>{costs[i]||"—"}₡</span>}
             {a.name}
-            {c&&<span style={{opacity:.65,fontSize:9}}>·{c.name}</span>}
+            {c&&<span style={{opacity:.65,fontSize:12}}>·{c.name}</span>}
           </div>
         );
       })}
@@ -2591,22 +2590,23 @@ function GameScreen({state,myPid,send}){
       {/* ── Top bar – global parameters ── */}
       <GlobalBar state={state}/>
 
+      {/* ── Player strip — all 5 players, horizontal, always visible ── */}
+      <div className="tm-player-strip">
+        {state.players.map((p,i)=>(
+          <div className="tm-player-card" key={p.id}>
+            <PlayerPanel player={p}
+              isActive={state.activePlayerIdx===i} isMe={p.id===myPid}/>
+          </div>
+        ))}
+      </div>
+
       {/* ── Main area ── */}
       <div className="tm-main">
 
-        {/* ── Left: Board + player list ── */}
+        {/* ── Left: Board ── */}
         <div className="tm-board-col">
-
           <HexBoard state={state} myPid={myPid}
             onHexClick={hexId=>send({t:"placeTile",pid:myPid,hexId})}/>
-
-          {/* Player cards below board */}
-          <div style={{overflowY:"auto",marginTop:8,paddingBottom:8,flex:1}}>
-            {state.players.map((p,i)=>(
-              <PlayerPanel key={p.id} player={p}
-                isActive={state.activePlayerIdx===i} isMe={p.id===myPid}/>
-            ))}
-          </div>
         </div>
 
         {/* ── Right: Side panel ── */}
@@ -2627,7 +2627,7 @@ function GameScreen({state,myPid,send}){
                 <span style={{width:9,height:9,borderRadius:"50%",
                   background:activeP.color,flexShrink:0,
                   boxShadow:isMyTurn?`0 0 8px ${activeP.color}`:"none"}}/>
-                <span style={{fontWeight:700,fontSize:12,
+                <span style={{fontWeight:700,fontSize:15,
                   color:isMyTurn?T.text:activeP.color}}>
                   {isMyTurn?"Your turn":""+activeP.name+"'s turn"}
                 </span>
@@ -2635,12 +2635,12 @@ function GameScreen({state,myPid,send}){
                   <span style={{marginLeft:"auto",
                     background:`linear-gradient(135deg,${activeP.color}22,${activeP.color}08)`,
                     border:`1px solid ${activeP.color}44`,borderRadius:5,
-                    padding:"2px 8px",fontSize:10,color:activeP.color,fontWeight:700}}>
+                    padding:"2px 8px",fontSize:13,color:activeP.color,fontWeight:700}}>
                     {activeP.actionsLeft} action{activeP.actionsLeft!==1?"s":""} left
                   </span>
                 )}
                 {state.pendingTile&&(
-                  <span style={{marginLeft:"auto",color:T.gold,fontSize:10,fontWeight:700}}>
+                  <span style={{marginLeft:"auto",color:T.gold,fontSize:13,fontWeight:700}}>
                     ➜ placing {state.pendingTile.type}
                   </span>
                 )}
@@ -2655,17 +2655,17 @@ function GameScreen({state,myPid,send}){
               padding:"6px 14px",background:T.surf,
               borderBottom:`1px solid ${T.border}`,overflowX:"auto",
             }}>
-              <span style={{fontSize:9,fontWeight:700,letterSpacing:"1.5px",
+              <span style={{fontSize:12,fontWeight:700,letterSpacing:"1.5px",
                 color:T.muted,textTransform:"uppercase",flexShrink:0}}>You</span>
               {["mc","steel","titanium","plants","energy","heat"].map(k=>(
                 <span key={k} style={{display:"flex",alignItems:"center",gap:3,
-                  fontSize:11,color:RES_COLOR[k],flexShrink:0}}>
+                  fontSize:14,color:RES_COLOR[k],flexShrink:0}}>
                   {RES_ICON[k]}<b style={{color:T.text}}>{me[k]}</b>
-                  {me[k+"Prod"]!==0&&<span style={{fontSize:9,color:T.muted}}>
+                  {me[k+"Prod"]!==0&&<span style={{fontSize:12,color:T.muted}}>
                     ({me[k+"Prod"]>0?"+":""}{me[k+"Prod"]})</span>}
                 </span>
               ))}
-              <span style={{marginLeft:"auto",fontSize:11,color:T.gold,fontWeight:700,
+              <span style={{marginLeft:"auto",fontSize:14,color:T.gold,fontWeight:700,
                 fontFamily:"'Orbitron',sans-serif",flexShrink:0}}>TR {me.TR}</span>
             </div>
           )}
@@ -2679,7 +2679,7 @@ function GameScreen({state,myPid,send}){
               const badge=tabBadge[t];
               return(
                 <button key={t} onClick={()=>setTab(key)}
-                  style={{flex:1,padding:"9px 4px",fontSize:11,fontWeight:700,
+                  style={{flex:1,padding:"9px 4px",fontSize:14,fontWeight:700,
                     letterSpacing:"0.5px",textTransform:"uppercase",
                     background:active?T.surfH:T.surf,
                     color:active?T.text:T.muted,
@@ -2692,7 +2692,7 @@ function GameScreen({state,myPid,send}){
                   {t}
                   {badge>0&&(
                     <span style={{background:T.gold,color:"#000",borderRadius:10,
-                      padding:"0 5px",fontSize:9,fontWeight:900,lineHeight:"16px"}}>
+                      padding:"0 5px",fontSize:12,fontWeight:900,lineHeight:"16px"}}>
                       {badge}
                     </span>
                   )}
@@ -2713,12 +2713,12 @@ function GameScreen({state,myPid,send}){
               <div>
                 {state.log.map((l,i)=>(
                   <div key={i} style={{
-                    fontSize:11,padding:"5px 0",
+                    fontSize:14,padding:"5px 0",
                     borderBottom:`1px solid ${T.border}22`,
                     color:i===0?T.text:T.muted,
                     display:"flex",alignItems:"baseline",gap:6,
                   }}>
-                    <span style={{color:T.border,fontSize:9,flexShrink:0}}>
+                    <span style={{color:T.border,fontSize:12,flexShrink:0}}>
                       {String(state.log.length-i).padStart(2,"0")}
                     </span>
                     {l}
@@ -2795,17 +2795,28 @@ export default function App(){
       @media (prefers-reduced-motion: reduce){
         *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
       }
+      .tm-player-strip{display:flex;gap:8px;flex-wrap:wrap;flex-shrink:0;
+        padding:8px 12px;background:${T.surf};
+        border-bottom:1px solid ${T.border};overflow-x:auto}
+      .tm-player-card{flex:1 1 230px;min-width:210px;max-width:300px}
       .tm-main{display:flex;flex:1;overflow:hidden}
-      .tm-board-col{display:flex;flex-direction:column;flex:1 1 480px;
-        max-width:580px;min-width:300px;padding:10px 8px 0 10px;overflow:hidden}
-      .tm-side-col{flex:1 1 380px;min-width:280px;display:flex;flex-direction:column;
+      .tm-board-col{display:flex;flex-direction:column;align-items:center;
+        justify-content:flex-start;flex:1 1 640px;
+        min-width:340px;padding:16px 16px 8px;overflow:auto}
+      .tm-side-col{flex:1 1 420px;min-width:300px;max-width:480px;
+        display:flex;flex-direction:column;
         border-left:1px solid ${T.border};overflow:hidden;
         background:linear-gradient(180deg,${T.surfH}08,transparent)}
+      @media (max-width: 1000px){
+        .tm-side-col{max-width:none}
+      }
       @media (max-width: 880px){
+        .tm-player-strip{overflow-x:auto;flex-wrap:nowrap}
+        .tm-player-card{flex:0 0 220px}
         .tm-main{flex-direction:column;overflow-y:auto;overflow-x:hidden}
         .tm-board-col{max-width:100%;flex:0 0 auto}
         .tm-side-col{border-left:none;border-top:1px solid ${T.border};
-          min-height:50vh;flex:1 1 auto}
+          min-height:50vh;flex:1 1 auto;max-width:none}
       }
     `;
     document.head.appendChild(s);
@@ -2915,11 +2926,11 @@ export default function App(){
       <div style={{...CARD_S,maxWidth:480}}>
         {/* Title */}
         <div style={{textAlign:"center",marginBottom:24}}>
-          <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:11,fontWeight:600,
+          <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:14,fontWeight:600,
             letterSpacing:"4px",color:T.muted,marginBottom:8,textTransform:"uppercase"}}>
             Multiplayer Session
           </div>
-          <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:22,fontWeight:900,
+          <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:24,fontWeight:900,
             background:`linear-gradient(135deg,${T.gold},${T.orange})`,
             WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",
             letterSpacing:"3px",marginBottom:16}}>
@@ -2928,9 +2939,9 @@ export default function App(){
           {/* Room code display */}
           <div style={{background:T.surfH,borderRadius:10,padding:"12px 20px",
             border:`1px solid ${T.border}`,marginBottom:10}}>
-            <div style={{color:T.muted,fontSize:10,fontWeight:600,letterSpacing:"3px",
+            <div style={{color:T.muted,fontSize:13,fontWeight:600,letterSpacing:"3px",
               textTransform:"uppercase",marginBottom:6}}>Room Code</div>
-            <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:38,fontWeight:900,
+            <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:40,fontWeight:900,
               letterSpacing:14,color:T.gold,lineHeight:1,
               textShadow:`0 0 20px ${T.gold}55`}}>
               {code||"···"}
@@ -2938,7 +2949,7 @@ export default function App(){
           </div>
           {code&&(
             <button onClick={()=>navigator.clipboard?.writeText(code).catch(()=>{})}
-              style={{...BTN_S,fontSize:11,padding:"6px 16px",color:T.blue,
+              style={{...BTN_S,fontSize:14,padding:"6px 16px",color:T.blue,
                 border:`1px solid ${T.blue}44`,background:T.surfH}}>
               📋 Copy Code
             </button>
@@ -2947,7 +2958,7 @@ export default function App(){
 
         {/* Players list */}
         <div style={{marginBottom:20}}>
-          <div style={{fontSize:10,fontWeight:700,letterSpacing:"2px",textTransform:"uppercase",
+          <div style={{fontSize:13,fontWeight:700,letterSpacing:"2px",textTransform:"uppercase",
             color:T.muted,marginBottom:10}}>
             Players — {gs?.players?.length||1} / 5
           </div>
@@ -2959,12 +2970,12 @@ export default function App(){
                 animation:`floatUp .3s ease ${i*.06}s both`}}>
                 <span style={{width:10,height:10,borderRadius:"50%",background:p.color,
                   flexShrink:0,boxShadow:`0 0 8px ${p.color}66`}}/>
-                <span style={{fontSize:13,fontWeight:600,color:T.text,flex:1}}>{p.name}</span>
+                <span style={{fontSize:16,fontWeight:600,color:T.text,flex:1}}>{p.name}</span>
                 {p.id===pid&&(
-                  <span style={{fontSize:10,color:T.muted,background:T.surfB,
+                  <span style={{fontSize:13,color:T.muted,background:T.surfB,
                     borderRadius:4,padding:"2px 7px"}}>you{isHostRef.current?" · host":""}</span>
                 )}
-                {i===0&&<span style={{fontSize:10,color:T.gold}}>👑</span>}
+                {i===0&&<span style={{fontSize:13,color:T.gold}}>👑</span>}
               </div>
             ))}
           </div>
@@ -2985,19 +2996,19 @@ export default function App(){
                   ?`linear-gradient(135deg,${T.green},#1a6030)`
                   :T.surfH,
                 color:cur_players_ok(gs)?"#fff":T.muted,
-                fontSize:14,fontWeight:700,letterSpacing:"1px",
+                fontSize:17,fontWeight:700,letterSpacing:"1px",
                 boxShadow:cur_players_ok(gs)?`0 4px 20px ${T.green}44`:"none",
               }}>
               {cur_players_ok(gs)
                 ?`🚀 START GAME  (${gs.players.length} players)`
                 :`Waiting for players… (${gs?.players?.length||1}/2 min)`}
             </button>
-            {err&&<div style={{color:T.red,fontSize:12,marginTop:8,textAlign:"center"}}>{err}</div>}
+            {err&&<div style={{color:T.red,fontSize:15,marginTop:8,textAlign:"center"}}>{err}</div>}
           </>
         ):(
           <div style={{textAlign:"center",color:T.muted,padding:"14px",
             background:T.surfH,borderRadius:8,border:`1px solid ${T.border}`,
-            fontSize:12,fontWeight:600,letterSpacing:"0.5px"}}>
+            fontSize:15,fontWeight:600,letterSpacing:"0.5px"}}>
             ⏳ Waiting for host to start the game…
           </div>
         )}
@@ -3021,7 +3032,7 @@ export default function App(){
           marginBottom:6}}>
           TERRAFORMING MARS
         </div>
-        <div style={{color:T.muted,fontSize:12,letterSpacing:"3px",
+        <div style={{color:T.muted,fontSize:15,letterSpacing:"3px",
           textTransform:"uppercase",fontWeight:500}}>
           2–5 Players · Strategy · Competitive
         </div>
@@ -3037,7 +3048,7 @@ export default function App(){
         <button onClick={createRoom}
           style={{...BTN_S,width:"100%",textAlign:"center",marginBottom:18,
             background:`linear-gradient(135deg,${T.mars},#7a2000)`,color:"#fff",
-            fontSize:15,fontWeight:700,letterSpacing:"1px",
+            fontSize:18,fontWeight:700,letterSpacing:"1px",
             boxShadow:`0 4px 24px ${T.mars}55`}}>
           {status==="Creating…"?"⏳ Creating room…":"🏠 Create Room"}
         </button>
@@ -3045,7 +3056,7 @@ export default function App(){
         {/* Divider */}
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
           <div style={{flex:1,height:"1px",background:T.border}}/>
-          <span style={{color:T.muted,fontSize:10,fontWeight:600,letterSpacing:"2px",
+          <span style={{color:T.muted,fontSize:13,fontWeight:600,letterSpacing:"2px",
             textTransform:"uppercase"}}>or join</span>
           <div style={{flex:1,height:"1px",background:T.border}}/>
         </div>
@@ -3055,13 +3066,13 @@ export default function App(){
           onKeyDown={e=>e.key==="Enter"&&joinRoom()}
           placeholder="ROOM CODE" maxLength={5}
           style={{...INP_S,marginBottom:12,textAlign:"center",
-            fontFamily:"'Orbitron',sans-serif",fontSize:24,
+            fontFamily:"'Orbitron',sans-serif",fontSize:26,
             letterSpacing:12,fontWeight:700,color:T.gold}}/>
 
         <button onClick={joinRoom}
           style={{...BTN_S,width:"100%",textAlign:"center",
             background:`linear-gradient(135deg,${T.blue}cc,#153060)`,color:"#fff",
-            fontSize:15,fontWeight:700,letterSpacing:"1px"}}>
+            fontSize:18,fontWeight:700,letterSpacing:"1px"}}>
           {status==="Connecting…"||status==="Joining…"
             ?`⏳ ${status}`:"🚀 Join Room"}
         </button>
@@ -3069,12 +3080,12 @@ export default function App(){
         {err&&(
           <div style={{marginTop:12,padding:"8px 12px",borderRadius:6,
             background:T.red+"18",border:`1px solid ${T.red}44`,
-            color:T.red,fontSize:12,textAlign:"center",fontWeight:600}}>
+            color:T.red,fontSize:15,textAlign:"center",fontWeight:600}}>
             ⚠ {err}
           </div>
         )}
         {!socketReady&&(
-          <div style={{textAlign:"center",color:T.muted,fontSize:11,marginTop:10}}>
+          <div style={{textAlign:"center",color:T.muted,fontSize:14,marginTop:10}}>
             Connecting to server…
           </div>
         )}
@@ -3083,7 +3094,7 @@ export default function App(){
   );
 
   if(!gs) return(
-    <div style={{...LOBBY_S,background:T.bg,color:T.muted,minHeight:"100vh",fontFamily:"'Exo 2',sans-serif",flexDirection:"column",gap:12}}><div style={{fontSize:"2rem",opacity:.4}}>🌍</div><div style={{letterSpacing:"3px",fontFamily:"'Orbitron',sans-serif",fontSize:12,color:T.muted}}>LOADING…</div></div>
+    <div style={{...LOBBY_S,background:T.bg,color:T.muted,minHeight:"100vh",fontFamily:"'Exo 2',sans-serif",flexDirection:"column",gap:12}}><div style={{fontSize:"2rem",opacity:.4}}>🌍</div><div style={{letterSpacing:"3px",fontFamily:"'Orbitron',sans-serif",fontSize:15,color:T.muted}}>LOADING…</div></div>
   );
 
   if(gs.gameOver||screen==="end") return <EndScreen state={gs}/>;
@@ -3097,7 +3108,7 @@ export default function App(){
           letterSpacing:"2px",background:`linear-gradient(135deg,${T.gold},${T.orange})`,
           WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>
           🌍 TERRAFORMING MARS</span>
-        <span style={{color:T.muted,fontSize:11,letterSpacing:"1px"}}>Room: {code}</span>
+        <span style={{color:T.muted,fontSize:14,letterSpacing:"1px"}}>Room: {code}</span>
       </div>
       <CorpSelection state={gs} myPid={pid} send={sendOrJoin}/>
       <div style={{position:"fixed",bottom:0,left:0,right:0,
@@ -3106,9 +3117,9 @@ export default function App(){
         {gs.players.map(p=>(
           <div key={p.id} style={{display:"flex",alignItems:"center",gap:5,
             background:p.corpChosen?T.surfH:T.surfB,borderRadius:20,padding:"3px 10px",
-            border:`1px solid ${p.corpChosen?p.color+"66":T.border}`,fontSize:11,
+            border:`1px solid ${p.corpChosen?p.color+"66":T.border}`,fontSize:14,
             color:p.corpChosen?p.color:T.muted,fontWeight:p.corpChosen?700:400}}>
-            <span style={{fontSize:9}}>{p.corpChosen?"✓":"○"}</span>{p.name}
+            <span style={{fontSize:12}}>{p.corpChosen?"✓":"○"}</span>{p.name}
           </div>
         ))}
       </div>
@@ -3124,7 +3135,7 @@ export default function App(){
           letterSpacing:"2px",background:`linear-gradient(135deg,${T.gold},${T.orange})`,
           WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>
           🌍 TERRAFORMING MARS</span>
-        <span style={{color:T.muted,fontSize:11,letterSpacing:"1px"}}>
+        <span style={{color:T.muted,fontSize:14,letterSpacing:"1px"}}>
           Gen {gs.generation} · Room {code}</span>
       </div>
       <ResearchScreen state={gs} myPid={pid} send={sendOrJoin}/>
@@ -3145,7 +3156,7 @@ const CARD_S={
 const BTN_S={
   background:`linear-gradient(160deg,${T.surfB},${T.surf})`,
   color:T.text,border:`1px solid ${T.border}`,borderRadius:8,
-  padding:"12px 22px",fontSize:14,fontWeight:700,cursor:"pointer",
+  padding:"12px 22px",fontSize:17,fontWeight:700,cursor:"pointer",
   fontFamily:"'Exo 2',sans-serif",letterSpacing:"0.3px",
   boxShadow:"0 2px 12px #00000050,inset 0 1px 0 #ffffff08",
   transition:"filter .15s",
@@ -3153,7 +3164,7 @@ const BTN_S={
 const INP_S={
   width:"100%",padding:"11px 16px",borderRadius:8,
   border:`1.5px solid ${T.border}`,background:T.surfH,color:T.text,
-  fontSize:15,outline:"none",fontFamily:"'Exo 2',sans-serif",
+  fontSize:18,outline:"none",fontFamily:"'Exo 2',sans-serif",
   boxSizing:"border-box",transition:"border-color .2s",
 };
 
